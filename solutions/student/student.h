@@ -9,32 +9,48 @@ template <typename T>
 void CP::queue<T>::remove_many(std::vector<size_t> pos)
   {
   
-    if(pos.empty()) return;
+    // if(pos.empty()) return;
 
-    std::sort(pos.begin(), pos.end());
+    // std::sort(pos.begin(), pos.end());
 
-    // shiftleft store now how many data that was removed, this will use indexing for next remove
-    size_t shiftleft = 0;
-    size_t pos_idx = 0;
+    // // shiftleft store now how many data that was removed, this will use indexing for next remove
+    // size_t shiftleft = 0;
+    // size_t pos_idx = 0;
 
-    for (size_t i = 0; i < mSize; ++i)
-    {
+    // for (size_t i = 0; i < mSize; ++i)
+    // {
 
-      size_t idx = (mFront + i) % mCap;
-      /* code */ 
-      if (pos_idx < pos.size() && i == pos[pos_idx])
-      {
-        /* code */
-        shiftleft++;
-        pos_idx++;
-      }else{
-        // shift data to left
-        mData[(mFront + i - shiftleft) % mCap] = mData[idx];
-      }
+    //   size_t idx = (mFront + i) % mCap;
+    //   /* code */ 
+    //   if (pos_idx < pos.size() && i == pos[pos_idx])
+    //   {
+    //     /* code */
+    //     shiftleft++;
+    //     pos_idx++;
+    //   }else{
+    //     // shift data to left
+    //     mData[(mFront + i - shiftleft) % mCap] = mData[idx];
+    //   }
       
-    }
+    // }
 
-    mSize -= shiftleft;
+    // mSize -= shiftleft;
+
+      CP::queue<T> q;
+
+      std::sort(pos.begin(), pos.end());
+
+      auto it = pos.begin();
+
+      for(auto i = 0 ; i < mSize; i++){
+
+        if(i == *it){
+          it++;
+          continue;
+        }
+        q.push(mData[(mFront + i) % mCap]);
+      }
+      *this = q;
 
   }
 
