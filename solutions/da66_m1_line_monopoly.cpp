@@ -42,7 +42,7 @@ int main(){
                 // update it to next pointer after delete old overlaped
                 it = next(it);
                 range.erase(prev(it));
-                // or use
+                // or use because erase return next interator
                 // it = range.erase(it);
             }
 
