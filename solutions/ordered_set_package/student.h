@@ -1,27 +1,45 @@
 #include <vector>
-#include <bits/stdc++.h>
+#include <algorithm>
 using namespace std;
 
 template <typename T>
 vector<T> Union(const vector<T>& A, const vector<T>& B) {
-    vector<T> v;
-    unordered_set<T> seen;
+    vector<T> v = A;
 
-    f
-    
+    bool isHave[100000] = {false};
+
+    // loop element in a
+    for(auto e : A){
+        isHave[e] = true;
+    }
+
+    // loop element in b
+    for(auto e : B){
+        if(!isHave[e]){
+            v.push_back(e);
+        }else{
+            isHave[e] = true;
+        }
+    }
     return v;
 }
 
 template <typename T>
 vector<T> Intersect(const vector<T>& A, const vector<T>& B) {
     vector<T> v;
-    unordered_set<T> set_A(A.begin(), A.end());
-    for (const T &e : B)
-    {
-        /* code */
-        if(set_A.count(e)){
+
+    bool isHave[100000] = {false};
+    
+    // loop marker in isHave with element in B
+    for(auto e: B){
+        isHave[e] = true;
+    }
+
+    // loop element is intersect (A)
+    for(auto e: A){
+        if(isHave[e]){
             v.push_back(e);
-        } 
+        }
     }
     
     return v;
